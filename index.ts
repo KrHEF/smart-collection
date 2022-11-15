@@ -1,3 +1,16 @@
+import './lib/jasmine-4.5.0/jasmine.css';
+
+import './lib/jasmine-4.5.0/jasmine.js';
+import './lib/jasmine-4.5.0/jasmine-html.js';
+import './lib/jasmine-4.5.0/boot0.js';
+import './lib/jasmine-4.5.0/boot1.js';
+
+import './src/Player.js';
+import './src/Song.js';
+
+import './spec/SpecHelper.js';
+import './spec/PlayerSpec.js';
+
 import {IPersonData} from './src/interfaces/person.interface';
 import {Person} from './src/person/person.class';
 import {PersonCollection} from './src/person/person.collection';
