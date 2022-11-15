@@ -22,10 +22,12 @@ export class ExecCollection<T> extends Collection<T> {
     public call(callFunc: TCallFunc<T>): this;
     public call(callFunc: ICallMethod<T>): this;
     public call(callFunc: TCallFunc<T> | ICallMethod<T>): this {
-        if (typeof callFunc === 'function') {
+        if (!callFunc) { return this; }
+
+        if (typeof(callFunc) === 'function') {
             this._values
                 .forEach((value: T) => callFunc(value));
-        } else if (callFunc.filter) {
+        } else if (typeof(callFunc.filter) === 'function') {
             this._values
                 .filter((value: T) => callFunc.filter(value))
                 .forEach((value: T) => callFunc.call(value));

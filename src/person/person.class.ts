@@ -10,15 +10,15 @@ export class Person {
         this._age = people.age;
     }
 
+    public get age(): number {
+        return this._age;
+    }
+
     public showName(): void {
         console.log(this._name);
     }
 
     public getName(): string {
         return this._name;
-    }
-
-    public get age(): number {
-        return this._age;
     }
 }

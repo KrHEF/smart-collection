@@ -14,7 +14,6 @@ const personsData: IPersonData[] = [
 
 const persons: Person[] = personsData.map((people: IPersonData): Person => new Person(people));
 const pc: PersonCollection = new PersonCollection(persons);
-// pc.showName();
 
 // Показать имена и возвраст всех, затем только имена для 18+
 pc
@@ -23,9 +22,9 @@ pc
 .showName();
 
 // Тоже самое, без урезания коллекции
-pc
-.call((people: Person) => { console.log(`${people.getName()} - ${people.age}`)} )
-.call({
-    filter: ((people: Person) => people.age >= 18),
-    call: (people: Person) => { people.showName(); },
-});
+// pc
+// .call((people: Person) => { console.log(`${people.getName()} - ${people.age}`)} )
+// .call({
+//     filter: ((people: Person) => people.age >= 18),
+//     call: (people: Person) => { people.showName(); },
+// });

@@ -3,8 +3,7 @@ import {ExecCollection} from './exec-collection.class';
 export class UniqueCollection<T> extends ExecCollection<T> {
 
     public constructor();
-    public constructor(value: T);
-    public constructor(values: T[]);
+    public constructor(value: T | T[]);
     public constructor(values?: T | T[]) {
         super();
 
