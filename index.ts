@@ -25,27 +25,27 @@ pc
 .do(() => console.log('<===================================>'));
 
 // Тоже самое, без урезания коллекции
-// const pc1: PersonCollection = new PersonCollection(persons);
-// pc1
-// .sort((a: Person, b: Person) => a.age - b.age)
-// .call((person: Person) => { console.log(`${person.getName()} - ${person.age}`)} )
-// .call({
-//     filter: ((person: Person) => person.age >= 18),
-//     call: (person: Person) => { person.showName(); },
-// })
-// .do(() => console.log('<===================================>'));
+const pc1: PersonCollection = new PersonCollection(persons);
+pc1
+.sort((a: Person, b: Person) => a.age - b.age)
+.call((person: Person) => { console.log(`${person.getName()} - ${person.age}`)} )
+.call({
+    filter: ((person: Person) => person.age >= 18),
+    call: (person: Person) => { person.showName(); },
+})
+.do(() => console.log('<===================================>'));
 
 // Тоже самое через цикл for..of (без сортировки)
-// const pc2: PersonCollection = new PersonCollection(persons);
-// for (const person of pc2) {
-//     console.log(`${person.getName()} - ${person.age}`);
-// }
-// for (const person of pc2) {
-//     if (person.age >= 18) {
-//         person.showName();
-//     }
-// }
-// console.log('<===================================>')
+const pc2: PersonCollection = new PersonCollection(persons);
+for (const person of pc2) {
+    console.log(`${person.getName()} - ${person.age}`);
+}
+for (const person of pc2) {
+    if (person.age >= 18) {
+        person.showName();
+    }
+}
+console.log('<===================================>')
 
 // Уникальная коллекция
 const uc: UniqueCollection<Person> = new UniqueCollection(persons);

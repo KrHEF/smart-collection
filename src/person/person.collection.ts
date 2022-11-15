@@ -8,7 +8,14 @@ export class PersonCollection extends SmartCollection<Person> {
         return this;
     }
 
-    public getNames(): string[] {
+
+    public getNames(): string[];
+    public getNames(callFunc: (name: string) => void): this;
+    public getNames(callFunc?: (name: string) => void): this | string[] {
+        if (callFunc) {
+            this._values.forEach((p: Person) => callFunc(p.getName()));
+            return this;
+        }
         return this._values.map((p: Person) => p.getName());
     }
 }
