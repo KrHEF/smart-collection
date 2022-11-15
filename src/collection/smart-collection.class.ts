@@ -1,29 +1,14 @@
-export class Collection<T> implements Iterable<T> {
+import {ExecCollection} from "./exec-collection.class";
 
-    protected _values: T[];
-
-    public constructor();
-    public constructor(values: T | T[]);
-    public constructor(values?: T | T[]) {
-        this._values = this.toArray(values);
-    }
-
-    public get size(): number {
-        return this._values.length;
-    }
-
-    public get length(): number {
-        return this.size;
-    }
-
-    public get values(): T[] {
-        return [...this._values];
-    }
+export class SmartCollection<T> extends ExecCollection<T> implements Iterable<T> {
 
     public [Symbol.iterator](): Iterator<T> {
         return this._values[Symbol.iterator]();
     };
 
+    /**
+     * Adds values to the start of the collection
+     */
     public lpush(values: T | T[]): this {
         const newValues: T[] = this.toArray(values);
         this._values.unshift(...newValues);
@@ -31,6 +16,9 @@ export class Collection<T> implements Iterable<T> {
         return this;
     }
 
+    /**
+     * Adds values to the end of the collection
+     */
     public rpush(values: T | T[]): this {
         const newValues: T[] = this.toArray(values);
         this._values.push(...newValues);
@@ -38,7 +26,19 @@ export class Collection<T> implements Iterable<T> {
         return this;
     }
 
+    /**
+     * Removes value from the start of the collection and returns it.
+     * 
+     * If the collection is empty, null is returned.
+     */
     public lpop(): T | null;
+    /**
+     * Removes `count` values from the start of the collection ant returns them.
+     * 
+     * If the collection is empty, null is returned.
+     * 
+     * If `count` less than length of collection, returns `length` values.
+     */
     public lpop(count: number): T[];
     public lpop(count?: number): null | T | T[] {
         if (count === undefined) {
@@ -49,7 +49,19 @@ export class Collection<T> implements Iterable<T> {
         return this._values.splice(0, count);
     }
 
+    /**
+     * Removes value from the end of the collection and returns it.
+     * 
+     * If the collection is empty, null is returned.
+     */
     public rpop(): T | null;
+    /**
+     * Removes `count` values from the end of the collection ant returns them.
+     * 
+     * If the collection is empty, null is returned.
+     * 
+     * If `count` less than length of collection, returns `length` values.
+     */
     public rpop(count: number): T[];
     public rpop(count: number = 1): null | T | T[] {
         if (count === undefined) {
@@ -60,8 +72,9 @@ export class Collection<T> implements Iterable<T> {
         return this._values.splice(-count).reverse();
     }
 
-    public insert(value: T, index: number): this;
-    public insert(values: T[], index: number): this;
+    /**
+     * Adds values to the collection starting at the `index`
+     */
     public insert(values: T | T[], index: number): this {
         const insertValues: T[] = this.toArray(values);
         this._values.splice(index, 0, ...insertValues);
@@ -69,8 +82,9 @@ export class Collection<T> implements Iterable<T> {
         return this;
     }
 
-    public delete(value: T): this;
-    public delete(values: T[]): this;
+    /**
+     * Removes values from the collection
+     */
     public delete(values: T | T[]): this {
         if (!this.size) { return this; }
 
@@ -80,16 +94,26 @@ export class Collection<T> implements Iterable<T> {
         return this;
     }
 
+    /**
+     * Clears the collection
+     */
     public clear(): this {
         this._values.length = 0;
 
         return this;
     }
 
+    /**
+     * Checks if the collection has the value.
+     * @returns {boolean} `true` if the collection has the value, otherwise `false`.
+     */
     public has(value: T): boolean {
         return this._values.includes(value);
     }
 
+    /**
+     * Sorts the collection.
+     */
     public sort(): this;
     public sort(compareFunc: (a: T, b: T) => number): this;
     public sort(compareFunc?: (a: T, b: T) => number): this {
@@ -100,11 +124,5 @@ export class Collection<T> implements Iterable<T> {
         }
 
         return this;
-    }
-
-    protected toArray(values?: T | T[]): T[] {
-        if (values === undefined || values === null) { return []; }
-
-        return (Array.isArray(values)) ? values : [values];
     }
 }
