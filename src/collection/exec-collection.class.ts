@@ -1,4 +1,4 @@
-import {Collection} from './collection.class';
+import {AbstractCollection} from './abstract-collecion.class';
 
 type TCallFunc<T> = (value: T) => void;
 type TFilterFunc<T> = (value: T) => boolean;
@@ -8,7 +8,7 @@ interface ICallMethod<T> {
     call: TCallFunc<T>;
 }
 
-export class ExecCollection<T> extends Collection<T> {
+export abstract class ExecCollection<T> extends AbstractCollection<T> {
 
     /**
      * Returns new filtered collection

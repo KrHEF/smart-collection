@@ -1,6 +1,6 @@
-import {ExecCollection} from './exec-collection.class';
+import {SmartCollection} from './smart-collection.class';
 
-export class UniqueCollection<T> extends ExecCollection<T> {
+export class UniqueCollection<T> extends SmartCollection<T> {
 
     public constructor();
     public constructor(value: T | T[]);
@@ -13,8 +13,6 @@ export class UniqueCollection<T> extends ExecCollection<T> {
         }
     }
 
-    public override lpush(value: T): this;
-    public override lpush(values: T[]): this;
     public override lpush(values: T | T[]): this {
         this.toArray(values)
             .reverse()
@@ -27,8 +25,6 @@ export class UniqueCollection<T> extends ExecCollection<T> {
         return this;
     }
 
-    public override rpush(value: T): this;
-    public override rpush(values: T[]): this;
     public override rpush(values: T | T[]): this {
         this.toArray(values)
             .forEach((value: T) => {
@@ -40,8 +36,6 @@ export class UniqueCollection<T> extends ExecCollection<T> {
         return this;
     }
 
-    public override insert(value: T, index: number): this;
-    public override insert(values: T[], index: number): this;
     public override insert(values: T | T[], index: number): this {
         this.toArray(values)
             .reverse()

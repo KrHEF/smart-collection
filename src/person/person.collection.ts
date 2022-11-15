@@ -1,7 +1,7 @@
-import {ExecCollection} from '../collection/exec-collection.class';
+import {SmartCollection} from '../collection/smart-collection.class';
 import {Person} from './person.class';
 
-export class PersonCollection extends ExecCollection<Person> {
+export class PersonCollection extends SmartCollection<Person> {
 
     public showName(): this {
         this._values.map((p: Person) => p.showName());
