@@ -1,17 +1,13 @@
 import {ExecCollection} from "./exec-collection.class";
 
-export class SmartCollection<T> extends ExecCollection<T> implements Iterable<T> {
-
-    public [Symbol.iterator](): Iterator<T> {
-        return this._values[Symbol.iterator]();
-    };
+export class SmartCollection<T> extends ExecCollection<T> {
 
     /**
      * Adds values to the start of the collection
      */
     public lpush(values: T | T[]): this {
         const newValues: T[] = this.toArray(values);
-        this._values.unshift(...newValues);
+        this._values.unshift(...newValues.reverse());
 
         return this;
     }

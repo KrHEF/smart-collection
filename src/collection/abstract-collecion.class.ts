@@ -1,4 +1,4 @@
-export abstract class AbstractCollection<T> {
+export abstract class AbstractCollection<T> implements Iterable<T> {
 
     protected _values: T[];
 
@@ -7,6 +7,10 @@ export abstract class AbstractCollection<T> {
     public constructor(values?: T | T[]) {
         this._values = this.toArray(values);
     }
+
+    public [Symbol.iterator](): Iterator<T> {
+        return this._values[Symbol.iterator]();
+    };
 
     /**
      * Gets length of collection.
